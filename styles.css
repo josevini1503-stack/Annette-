@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
+
+/* ── Variables ── */
+:root {
+  --lila-deep:    #6b3fa0;
+  --lila-mid:     #9b6dcc;
+  --lila-soft:    #c4a8f0;
+  --lila-pale:    #ede0ff;
+  --lila-bg:      #f7f2ff;
+  --white:        #ffffff;
+  --text-dark:    #3d2060;
+  --text-mid:     #7a5ca8;
+  --text-light:   #b09ad6;
+  --accent:       #f2c4e0;
+  --radius-card:  24px;
+  --radius-btn:   50px;
+  --shadow-card:  0 8px 40px rgba(107, 63, 160, 0.12);
+  --shadow-hover: 0 16px 56px rgba(107, 63, 160, 0.22);
+  --transition:   0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset & base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--lila-bg);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Decorative blobs ── */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  filter: blur(60px);
+}
+
+body::before {
+  width: 420px;
+  height: 420px;
+  background: var(--lila-soft);
+  top: -120px;
+  left: -140px;
+}
+
+body::after {
+  width: 320px;
+  height: 320px;
+  background: var(--accent);
+  bottom: -80px;
+  right: -100px;
+}
+
+/* ── Main card ── */
+.card {
+  position: relative;
+  z-index: 1;
+  background: var(--white);
+  border: 1px solid var(--lila-pale);
+  border-radius: var(--radius-card);
+  padding: 3rem 2.5rem 2.75rem;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  animation: fadeUp 0.7s ease both;
+}
+
+/* ── Heart icon ── */
+.icon-wrap {
+  width: 60px;
+  height: 60px;
+  background: var(--lila-pale);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  animation: pulse 2.8s ease-in-out infinite;
+}
+
+.icon-wrap svg {
+  width: 28px;
+  height: 28px;
+  fill: var(--lila-deep);
+}
+
+/* ── Typography ── */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--lila-deep);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  font-weight: 300;
+  color: var(--text-mid);
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+/* ── Divider ── */
+.divider {
+  width: 64px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--lila-soft), var(--accent));
+  border-radius: 2px;
+  margin: 1.75rem auto;
+}
+
+/* ── Section label ── */
+.section-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+/* ── Navigation links ── */
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.nav-links li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  background: var(--lila-bg);
+  border: 1px solid var(--lila-pale);
+  border-radius: var(--radius-btn);
+  color: var(--lila-deep);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: background var(--transition),
+              border-color var(--transition),
+              box-shadow var(--transition),
+              transform var(--transition);
+}
+
+.nav-links li a:hover {
+  background: var(--lila-pale);
+  border-color: var(--lila-soft);
+  box-shadow: 0 4px 20px rgba(107, 63, 160, 0.15);
+  transform: translateY(-2px);
+}
+
+.nav-links li a:active {
+  transform: translateY(0);
+}
+
+.nav-links li a .link-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ── Footer note ── */
+.footer-note {
+  margin-top: 2.25rem;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.08); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .card {
+    padding: 2.25rem 1.5rem 2rem;
+  }
+}
