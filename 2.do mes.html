@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Annette 💜</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(145deg, #f3eeff 0%, #e8d8ff 25%, #d8c8f8 50%, #e2d4ff 75%, #f0e8ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  .stars-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    animation: twinkle var(--d) ease-in-out infinite var(--delay);
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+
+  .floaty {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    animation: float var(--fd) ease-in-out infinite var(--fdelay);
+    font-size: var(--fs);
+    color: var(--fc);
+    opacity: 0.35;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--r)); }
+    50% { transform: translateY(-20px) rotate(calc(var(--r) + 8deg)); }
+  }
+
+  .glow-orb {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: orbPulse var(--od) ease-in-out infinite var(--odelay);
+  }
+
+  @keyframes orbPulse {
+    0%, 100% { transform: scale(1) translate(-50%, -50%); opacity: var(--oa); }
+    50% { transform: scale(1.2) translate(-50%, -50%); opacity: calc(var(--oa) * 1.6); }
+  }
+
+  .card {
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1.5px solid rgba(180, 130, 255, 0.3);
+    border-radius: 32px;
+    padding: 3.2rem 3.8rem;
+    max-width: 520px;
+    width: 90vw;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+      0 8px 48px rgba(160, 100, 255, 0.15),
+      0 2px 12px rgba(180, 130, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    animation: appear 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(35px) scale(0.97);
+  }
+
+  @keyframes appear {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(160, 100, 255, 0.15), rgba(200, 160, 255, 0.2));
+    border: 1px solid rgba(160, 100, 255, 0.3);
+    color: #8b5cf6;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0.38rem 1.2rem;
+    border-radius: 100px;
+    margin-bottom: 1.8rem;
+    animation: fadeSlide 1s 0.4s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  @keyframes fadeSlide {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 45%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+    animation: fadeSlide 1s 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .subtitle-date {
+    font-size: 0.82rem;
+    color: #b08ce0;
+    letter-spacing: 0.14em;
+    margin-bottom: 2rem;
+    animation: fadeSlide 1s 0.7s ease forwards;
+    opacity: 0;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    animation: fadeSlide 1s 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(160, 100, 255, 0.35), transparent);
+  }
+
+  .divider-heart {
+    font-size: 1.1rem;
+    animation: heartbeat 1.8s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.18); }
+  }
+
+  .counter-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2.2rem;
+    animation: fadeSlide 1s 0.9s ease forwards;
+    opacity: 0;
+  }
+
+  .counter-box {
+    background: linear-gradient(145deg, rgba(200, 160, 255, 0.2), rgba(180, 130, 255, 0.12));
+    border: 1px solid rgba(160, 100, 255, 0.22);
+    border-radius: 16px;
+    padding: 0.85rem 1rem;
+    min-width: 72px;
+  }
+
+  .counter-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    color: #7c3aed;
+    line-height: 1;
+    display: block;
+    font-weight: 700;
+  }
+
+  .counter-label {
+    font-size: 0.63rem;
+    color: #b08ce0;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+    display: block;
+    font-weight: 300;
+  }
+
+  .message {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #5b3d8a;
+    line-height: 1.9;
+    margin-bottom: 2rem;
+    animation: fadeSlide 1s 1.1s ease forwards;
+    opacity: 0;
+  }
+
+  .message strong {
+    font-style: normal;
+    color: #7c3aed;
+    font-weight: 700;
+  }
+
+  .footer-hearts {
+    display: flex;
+    justify-content: center;
+    gap: 0.55rem;
+    animation: fadeSlide 1s 1.3s ease forwards;
+    opacity: 0;
+  }
+
+  .hrt {
+    font-size: 1.2rem;
+    display: inline-block;
+    animation: heartPop var(--hp) ease-in-out infinite var(--hd);
+  }
+
+  @keyframes heartPop {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.35); opacity: 1; }
+  }
+
+  .petals {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .petal {
+    position: absolute;
+    top: -20px;
+    border-radius: 50% 0 50% 0;
+    animation: fall var(--fal) linear infinite var(--faldelay);
+    opacity: 0.5;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-20px) rotate(0deg) translateX(0); opacity: 0.6; }
+    80% { opacity: 0.4; }
+    100% { transform: translateY(110vh) rotate(var(--spin)) translateX(var(--drift)); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars-bg" id="stars"></div>
+<div class="petals" id="petals"></div>
+
+<!-- Orbes de luz lilas -->
+<div class="glow-orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(196,156,255,0.4),transparent 70%);top:0;left:0;transform-origin:top left;--od:8s;--odelay:0s;--oa:0.7;transform:translate(-30%,-30%);"></div>
+<div class="glow-orb" style="width:420px;height:420px;background:radial-gradient(circle,rgba(167,139,250,0.35),transparent 70%);bottom:0;right:0;transform-origin:bottom right;--od:10s;--odelay:2s;--oa:0.6;transform:translate(30%,30%);"></div>
+<div class="glow-orb" style="width:300px;height:300px;background:radial-gradient(circle,rgba(216,180,254,0.4),transparent 70%);top:50%;left:50%;--od:6s;--odelay:1s;--oa:0.5;transform:translate(-50%,-50%);"></div>
+
+<div class="card">
+  <div class="badge">✦ 2 meses juntos ✦</div>
+  
+ <div class="name">Annette</div>
+  <div class="subtitle-date">desde el primer día hasta hoy</div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-heart">💜</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="counter-wrap">
+    <div class="counter-box">
+      <span class="counter-num" id="cnt-dias">–</span>
+      <span class="counter-label">días</span>
+    </div>
+    <div class="counter-box">
+      <span class="counter-num" id="cnt-horas">–</span>
+      <span class="counter-label">horas</span>
+    </div>
+    <div class="counter-box">
+      <span class="counter-num" id="cnt-min">–</span>
+      <span class="counter-label">min</span>
+    </div>
+    <div class="counter-box">
+      <span class="counter-num" id="cnt-seg">–</span>
+      <span class="counter-label">seg</span>
+    </div>
+  </div>
+    
+  <div class="message">
+    Wao, ya dos meses mi amor lindo, realmente aún no puedo creer lo rápido que se ha pasado este tiempo juntos,
+    este tiempo donde eh sido super feliz a tu lado, muchas gracias por cada momento que pasamos juntos que compartimos
+    por todos esos besos, abrazos, porque estar entre tus brazos se siente como un lugar seguro, como mi hogar, soy muy 
+    feliz a tu lado y aunque tenga miedo de que pueda doler en algún momento, se que quiero seguir a tu lado, compartiendo 
+    contigo por lo feliz que me haces, muchas gracias por todas esas veces que me has escuchado reir, todas esas veces que
+    también has estado para mi cuando más te necesito, por escuchar cada queja de la vida que se me atraviesa y por demostrarme
+    que se siente que realmente te amen, gracias por hacerme tan feliz, espero este solo sea 1 mes más de los muchos que nos faltan.
+    Te amo y mucho mi amor lindo, eso nunca cambiara y pase lo que pase aquí estaré para ti. <br><strong>Te amo</strong><br>
+    Atte: Tu novio que te ama mucho (Vinito)💜.
+  </div>
+
+  <div class="footer-hearts">
+    <span class="hrt" style="--hp:2s;--hd:0s;">💜</span>
+    <span class="hrt" style="--hp:2.3s;--hd:0.3s;">🪻</span>
+    <span class="hrt" style="--hp:1.8s;--hd:0.6s;">💜</span>
+    <span class="hrt" style="--hp:2.1s;--hd:0.9s;">🪻</span>
+    <span class="hrt" style="--hp:2.4s;--hd:1.2s;">💜</span>
+  </div>
+</div>
+
+<script>
+// Estrellas lilas
+const starsEl = document.getElementById('stars');
+const starColors = ['#c084fc','#a855f7','#ddd6fe','#e9d5ff','#f3e8ff','#d8b4fe'];
+for (let i = 0; i < 90; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 3 + 0.8;
+  const color = starColors[Math.floor(Math.random() * starColors.length)];
+  s.style.cssText = `
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    width:${size}px;
+    height:${size}px;
+    background:${color};
+    --d:${2+Math.random()*5}s;
+    --delay:${Math.random()*6}s;
+  `;
+  starsEl.appendChild(s);
+}
+
+// Símbolos flotantes
+const floatSymbols = ['✦','✧','⋆','˚','·','✿','◌'];
+const floatColors = ['#a855f7','#c084fc','#ddd6fe','#7c3aed','#d8b4fe'];
+for (let i = 0; i < 20; i++) {
+  const f = document.createElement('div');
+  f.className = 'floaty';
+  f.textContent = floatSymbols[Math.floor(Math.random() * floatSymbols.length)];
+  f.style.cssText = `
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    --fs:${10+Math.random()*20}px;
+    --fc:${floatColors[Math.floor(Math.random()*floatColors.length)]};
+    --r:${Math.random()*360}deg;
+    --fd:${4+Math.random()*7}s;
+    --fdelay:${Math.random()*5}s;
+  `;
+  document.body.appendChild(f);
+}
+
+// Pétalos cayendo
+const petalsEl = document.getElementById('petals');
+const petalColors = ['#e9d5ff','#ddd6fe','#c084fc','#f3e8ff','#d8b4fe'];
+for (let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  const size = 6 + Math.random() * 8;
+  const color = petalColors[Math.floor(Math.random() * petalColors.length)];
+  p.style.cssText = `
+    left:${Math.random()*100}%;
+    width:${size}px;
+    height:${size * 1.2}px;
+    background:${color};
+    --fal:${6+Math.random()*10}s;
+    --faldelay:${Math.random()*10}s;
+    --spin:${(Math.random()-0.5)*720}deg;
+    --drift:${(Math.random()-0.5)*120}px;
+  `;
+  petalsEl.appendChild(p);
+}
+
+// Contador
+const inicio = new Date();
+inicio.setDate(inicio.getDate() - 61);
+inicio.setHours(0, 0, 0, 0);
+
+function update() {
+  const diff = new Date() - inicio;
+  const dias   = Math.floor(diff / 86400000);
+  const horas  = Math.floor((diff % 86400000) / 3600000);
+  const min    = Math.floor((diff % 3600000) / 60000);
+  const seg    = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cnt-dias').textContent = dias;
+  document.getElementById('cnt-horas').textContent = String(horas).padStart(2,'0');
+  document.getElementById('cnt-min').textContent   = String(min).padStart(2,'0');
+  document.getElementById('cnt-seg').textContent   = String(seg).padStart(2,'0');
+}
+update();
+setInterval(update, 1000);
+</script>
+</body>
+</html>
