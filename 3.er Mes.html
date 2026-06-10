@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 Meses Contigo 💜</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --fondo:        #B89FD8;
+    --morado-dark:  #2E1060;
+    --morado:       #5B2D99;
+    --morado-medio: #7C4BB8;
+    --celeste:      #5BB8D4;
+    --celeste-claro:#A8DCF0;
+    --blanco:       #FFFFFF;
+    --texto-oscuro: #1E0A40;
+    --card-bg:      rgba(255,255,255,0.92);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--fondo);
+    color: var(--texto-oscuro);
+    overflow-x: hidden;
+  }
+
+  #particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(160deg, var(--morado-dark) 0%, var(--morado) 60%, var(--fondo) 100%);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 70%, rgba(91,184,212,0.12) 0%, transparent 65%);
+  }
+
+  .hero-badge {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: .85rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--celeste-claro);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp .8s .3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 7rem);
+    color: var(--blanco);
+    line-height: 1.05;
+    opacity: 0;
+    animation: fadeUp .9s .5s forwards;
+  }
+
+  .hero h1 span {
+    color: var(--celeste-claro);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
+    color: rgba(255,255,255,0.85);
+    margin-top: .8rem;
+    opacity: 0;
+    animation: fadeUp .9s .8s forwards;
+  }
+
+  .counter-wrap {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp .9s 1s forwards;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .counter-box {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 16px;
+    padding: .9rem 1.3rem;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .counter-box .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--blanco);
+    display: block;
+    line-height: 1;
+  }
+
+  .counter-box .label {
+    font-size: .7rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--celeste-claro);
+    margin-top: .3rem;
+    display: block;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.5);
+    font-size: .75rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 1.5rem;
+  }
+
+  .section-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-size: .75rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--morado-dark);
+    font-weight: 700;
+    margin-bottom: .6rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--morado-dark);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .on-light .eyebrow       { color: var(--morado);      text-shadow: none; }
+  .on-light .section-title { color: var(--morado-dark); text-shadow: none; }
+
+  .carta {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 8px 40px rgba(46,16,96,0.18);
+    border-left: 4px solid var(--morado-medio);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .carta::after {
+    content: '💌';
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    font-size: 1.8rem;
+    opacity: .6;
+  }
+
+  .carta p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--texto-oscuro);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .carta .firma {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: var(--morado);
+    margin-top: 1.5rem;
+  }
+
+  .razones-bg { background: transparent; }
+
+  .razones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .razon-card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 1.4rem 1.2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(46,16,96,0.15);
+    border-top: 3px solid var(--celeste);
+    transition: transform .25s, box-shadow .25s;
+    cursor: default;
+  }
+
+  .razon-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 32px rgba(46,16,96,0.22);
+  }
+
+  .razon-card .emoji { font-size: 1.9rem; display: block; margin-bottom: .6rem; }
+
+  .razon-card p {
+    font-size: .9rem;
+    line-height: 1.5;
+    color: var(--texto-oscuro);
+    font-weight: 400;
+  }
+
+  .sorpresa-section { text-align: center; }
+
+  .jar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 1.2rem;
+  }
+
+  .jar {
+    width: 140px;
+    height: 180px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .jar svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 8px 24px rgba(123,79,166,0.3));
+    transition: transform .3s;
+  }
+
+  .jar:hover svg { transform: scale(1.06); }
+
+  .jar-stars {
+    position: absolute;
+    inset: 25px 15px 30px;
+    overflow: hidden;
+    border-radius: 4px 4px 40px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    padding: 6px;
+    align-content: flex-end;
+    pointer-events: none;
+  }
+
+  .star-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity .4s;
+  }
+
+  .jar.open .star-dot { opacity: 1; }
+
+  .jar-msg {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.25rem;
+    color: var(--morado-dark);
+    font-weight: 600;
+    opacity: .85;
+    transition: opacity .4s;
+  }
+
+  .jar.open + .jar-msg { opacity: 0; }
+
+  .wishes-box {
+    max-width: 440px;
+    width: 100%;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: 0 8px 40px rgba(46,16,96,0.18);
+    display: none;
+    text-align: left;
+  }
+
+  .wishes-box.visible { display: block; animation: fadeUp .6s forwards; }
+
+  .wish-item {
+    display: flex;
+    align-items: flex-start;
+    gap: .7rem;
+    padding: .6rem 0;
+    border-bottom: 1px solid rgba(91,45,153,0.12);
+    font-size: .95rem;
+    color: var(--texto-oscuro);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .wish-item:last-child { border-bottom: none; }
+  .wish-item .wi { font-size: 1.1rem; flex-shrink: 0; }
+
+  .cierre {
+    text-align: center;
+    background: linear-gradient(160deg, var(--morado) 0%, var(--morado-dark) 100%);
+    padding: 6rem 1.5rem;
+    color: var(--blanco);
+  }
+
+  .cierre .section-title { color: var(--blanco); }
+
+  .cierre p {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.3rem, 3.5vw, 2rem);
+    color: var(--celeste-claro);
+    margin-top: 1rem;
+  }
+
+  .heart-big {
+    font-size: 4rem;
+    display: block;
+    margin: 1.5rem auto 0;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.12); }
+  }
+
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 480px) {
+    .carta { padding: 2rem 1.4rem; }
+    .razones-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<section class="hero">
+  <p class="hero-badge">Hoy celebramos</p>
+  <h1>3 <span>meses</span><br>juntos</h1>
+  <p class="hero-sub">y cada día fue mi favorito 🌙</p>
+
+  <div class="counter-wrap" id="counter">
+    <div class="counter-box"><span class="num" id="cd">00</span><span class="label">Días</span></div>
+    <div class="counter-box"><span class="num" id="ch">00</span><span class="label">Horas</span></div>
+    <div class="counter-box"><span class="num" id="cm">00</span><span class="label">Minutos</span></div>
+    <div class="counter-box"><span class="num" id="cs">00</span><span class="label">Segundos</span></div>
+  </div>
+
+  <p class="scroll-hint">↓ sigue leyendo ↓</p>
+</section>
+
+<section>
+  <div class="section-inner reveal">
+    <span class="eyebrow">Para ti</span>
+    <h2 class="section-title">Una carta de mi corazón</h2>
+    <div class="carta">
+      <p>Mi vida hoy cumplimos 3 meses de poder estar juntos y se que ultimamente no han sido dias faciles, 
+        pero aún esos días que cueste sabes que aquí estaré para ti, no te dejaré solita, sabes que te amo y perdoname
+        si amarme a veces es difícil o va encontra de lo que tu esperabas, perdón pero te prometo que el amor que puedo
+        darte será el más puro y real que pueda, nunca te fallaré.</p>
+      <p>Muchas gracias por todo lo que has hecho por mí porque en cada momento que te he necesitado allí has estado, gracias
+        por siempre ser tan observadora y que con un unico comentario te guardes información que es valiosa para mi, gracias 
+        por hacerme feliz cada día que pasa y por la dicha de ser tu novio, gracias por todo mi vida.</p>
+      <div class="firma">Con todo mi cariño, siempre Vinito💜</div>
+    </div>
+  </div>
+</section>
+
+<section class="razones-bg">
+  <div class="section-inner reveal">
+    <span class="eyebrow">Por si no lo sabías</span>
+    <h2 class="section-title">Razones por las que me alegra estar contigo</h2>
+    <div class="razones-grid" id="razones"></div>
+  </div>
+</section>
+
+<section class="sorpresa-section">
+  <div class="section-inner reveal">
+    <span class="eyebrow">Una sorpresita</span>
+    <h2 class="section-title">Un frasco de deseos para nosotros ✨</h2>
+    <p style="font-weight:400; color:var(--morado-dark); margin-bottom:1rem;">Toca el frasco para abrirlo 🌟</p>
+
+    <div class="jar-wrap">
+      <div class="jar" id="jar" onclick="openJar()">
+        <svg viewBox="0 0 140 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="8" width="80" height="22" rx="8" fill="#7B4FA6"/>
+          <rect x="36" y="14" width="68" height="10" rx="5" fill="#9B6FC6"/>
+          <path d="M20 35 Q18 100 22 155 Q22 168 70 168 Q118 168 118 155 Q122 100 120 35 Z" fill="#EDE0FF" stroke="#C8A8E9" stroke-width="2"/>
+          <path d="M30 50 Q28 100 31 148" stroke="white" stroke-width="4" stroke-linecap="round" opacity=".4"/>
+          <ellipse cx="70" cy="162" rx="38" ry="6" fill="#C8A8E9" opacity=".4"/>
+        </svg>
+        <div class="jar-stars" id="jar-stars"></div>
+      </div>
+      <p class="jar-msg" id="jar-hint">( tócame )</p>
+      <div class="wishes-box" id="wishes-box"></div>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="section-inner">
+    <h2 class="section-title">A muchos meses más</h2>
+    <p>Por todo lo que fue, lo que es y lo que está por ser 🌙</p>
+    <span class="heart-big">💜</span>
+  </div>
+</section>
+
+<script>
+/* ─── CONTADOR desde el 10 de marzo de 2025 ─── */
+(function(){
+  // Fecha de inicio: 10 de marzo de 2025 (mes 2 = marzo, base 0)
+  const start = new Date(2026, 2, 10, 0, 0, 0);
+
+  function tick(){
+    const now = new Date();
+    const diff = now - start;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd').textContent = String(d).padStart(2,'0');
+    document.getElementById('ch').textContent = String(h).padStart(2,'0');
+    document.getElementById('cm').textContent = String(m).padStart(2,'0');
+    document.getElementById('cs').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+/* ─── RAZONES ─── */
+const razones = [
+  { e: '😂', t: 'Porque me haces reír con cualquier cosa.' },
+  { e: '🌙', t: 'Por esas noches que hemos hablado y se siente tan bonito que terminamos todos desvelados.' },
+  { e: '💬', t: 'Porque puedo hablar de lo que sea sin miedo a que me juzgues.' },
+  { e: '🤝', t: 'Porque me dan ganas de mejorar cada día para alcanzar un nosotros mejor.' },
+  { e: '✨', t: 'Por esa conexión especial que sentí desde un principio.' },
+  { e: '🫶', t: 'Porque me hiciste llorar como niño chiquito.' },
+];
+
+const grid = document.getElementById('razones');
+razones.forEach(r => {
+  const card = document.createElement('div');
+  card.className = 'razon-card';
+  card.innerHTML = `<span class="emoji">${r.e}</span><p>${r.t}</p>`;
+  grid.appendChild(card);
+});
+
+/* ─── FRASCO ─── */
+const wishes = [
+  { i: '🌅', t: 'Pasar nuestra primera noche juntos descansando.' },
+  { i: '🍕', t: 'Cocinar (o intentarlo) una cena especial' },
+  { i: '🎬', t: 'Maratón de películas de Tim Burton' }
+];
+
+const colors = ['#7C4BB8','#A8DCF0','#5B2D99','#5BB8D4','#2E1060','#A8DCF0'];
+
+const starsWrap = document.getElementById('jar-stars');
+for(let i = 0; i < 28; i++){
+  const dot = document.createElement('div');
+  dot.className = 'star-dot';
+  dot.style.background = colors[i % colors.length];
+  starsWrap.appendChild(dot);
+}
+
+const wishesBox = document.getElementById('wishes-box');
+wishes.forEach(w => {
+  const div = document.createElement('div');
+  div.className = 'wish-item';
+  div.innerHTML = `<span class="wi">${w.i}</span><span>${w.t}</span>`;
+  wishesBox.appendChild(div);
+});
+
+function openJar(){
+  const jar = document.getElementById('jar');
+  const hint = document.getElementById('jar-hint');
+  if(jar.classList.contains('open')) return;
+  jar.classList.add('open');
+  hint.style.opacity = '0';
+  setTimeout(() => {
+    wishesBox.classList.add('visible');
+    launchHearts();
+  }, 500);
+}
+
+function launchHearts(){
+  const emojis = ['💜','✨','🌙','💫','🪄'];
+  for(let i = 0; i < 18; i++){
+    setTimeout(() => {
+      const el = document.createElement('span');
+      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.cssText = `
+        position:fixed; font-size:${1+Math.random()*1.5}rem; pointer-events:none; z-index:999;
+        left:${20+Math.random()*60}vw; bottom:${20+Math.random()*20}vh;
+        animation: floatUp ${2+Math.random()*2}s ease forwards;
+      `;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }, i * 120);
+  }
+}
+
+/* ─── PARTÍCULAS ─── */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, pts = [];
+
+function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+const pColors = ['#A8DCF0','#7C4BB8','#5BB8D4','#E0D4F5','#2E7FA8'];
+for(let i=0;i<55;i++) pts.push({
+  x: Math.random()*2000, y: Math.random()*2000,
+  r: .6+Math.random()*2,
+  dx: (Math.random()-.5)*.3,
+  dy: -.1-Math.random()*.25,
+  c: pColors[Math.floor(Math.random()*pColors.length)],
+  o: .2+Math.random()*.5
+});
+
+function drawParticles(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x%W, p.y%H, p.r, 0, Math.PI*2);
+    ctx.fillStyle = p.c;
+    ctx.globalAlpha = p.o;
+    ctx.fill();
+    p.x += p.dx; p.y += p.dy;
+    if(p.y < -10){ p.y = H+10; p.x = Math.random()*W; }
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+/* ─── REVEAL ON SCROLL ─── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: .15 });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
